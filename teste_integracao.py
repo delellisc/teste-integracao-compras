@@ -12,18 +12,12 @@ def test_fluxo_integra_compras():
     compras_db.clear()
 
     # 1. Cadastrar usuários e testar
-    def test_cadastrar_usuario():
-        cadastrar_usuario(1, "João de Deus")
-        assert usuarios_db == {1: "João de Deus"}, "Usuário não condizente"
-
-    test_cadastrar_usuario()
+    cadastrar_usuario(1, "João de Deus")
+    assert usuarios_db == {1: "João de Deus"}, "Usuário não foi cadastrado corretamente."
 
     # 2. Cadastrar produtos e testar    
-    def test_cadastrar_produto():
-        cadastrar_produto(1, "Prancha em Miniatura", 100)
-        assert produtos_db == {1: {"nome": "Prancha em Miniatura", "preco": 100}}, "Produto não condizente"
-
-    test_cadastrar_produto()
+    cadastrar_produto(1, "Prancha em Miniatura", 100)
+    assert produtos_db == {1: {"nome": "Prancha em Miniatura", "preco": 100}}, "Produto não condizente"
 
     # 3. Realizar compra válida
     
