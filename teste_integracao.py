@@ -18,16 +18,22 @@ def test_fluxo_integra_compras():
 
     # 2. Cadastrar produtos e testar    
     cadastrar_produto(1, "Prancha em Miniatura", 100)
-    assert consultar_produto(1) == "Prancha em Miniatura", "Produto não condizente."
-
-    # 3. Realizar compra válida
+    assert consultar_produto(1) == {'nome': 'Prancha em Miniatura', 'preco': 100}, "Produto não condizente."
     
+    
+    # 3. Realizar compra válida
+    realizar_compra(1, [1])
+    assert listar_compras(1) == [{'produtos': [1], 'total': 100}]
 
     # 4. Tentar compra com produto inválido
-
+    try:
+        realizar_compra(1, [2])
+        assert False, "Esperado erro ao comprar produto inexistente"
+    except ValueError as error_msg:
+        assert str(error_msg) == "Produto 2 não encontrado.", f"Mensagem de erro incorreta: {e}"
 
     # 5. Verificar compras do usuário 1
-
+    
 
     # 6. Verificar um usuário que não tem compras
 
