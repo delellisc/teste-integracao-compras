@@ -6,33 +6,27 @@ from compras import realizar_compra, listar_compras, compras_db
 def test_fluxo_integra_compras():
     print("\nIniciando teste de integração do sistema de compras...\n")
 
-    """
-    def setUp(self):
-        self.usuarios_db = usuarios_db
-        self.produtos_db = produtos_db
-        self.compras_db = compras_db
-    """
-
     # Limpa os "bancos" em memória
-    def tearDown(self):
-        usuarios_db = {}
-        produtos_db = {}
-        compras_db = {}
+    usuarios_db.clear()
+    produtos_db.clear()
+    compras_db.clear()
 
     # 1. Cadastrar usuários e testar
     def test_cadastrar_usuario():
-        cadastrar_usuario(1, "Prancha em Miniatura")
-        assert usuarios_db == {1: "Prancha em Miniatura"}, "Produto não encontrado"
-
-        cadastrar_usuario(1, "Urso de Pelúca")
+        cadastrar_usuario(1, "João de Deus")
+        assert usuarios_db == {1: "João de Deus"}, "Usuário não condizente"
 
     test_cadastrar_usuario()
 
-    # 2. Cadastrar produtos e testar
+    # 2. Cadastrar produtos e testar    
+    def test_cadastrar_produto():
+        cadastrar_produto(1, "Prancha em Miniatura", 100)
+        assert produtos_db == {1: {"nome": "Prancha em Miniatura", "preco": 100}}, "Produto não condizente"
 
+    test_cadastrar_produto()
 
     # 3. Realizar compra válida
-
+    
 
     # 4. Tentar compra com produto inválido
 
