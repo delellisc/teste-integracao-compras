@@ -20,8 +20,7 @@ def test_fluxo_integra_compras():
     assert consultar_produto(1) == {'nome': 'Prancha em Miniatura', 'preco': 100}, "Produto não condizente."
     
     # 3. Realizar compra válida
-    realizar_compra(1, [1])
-    assert listar_compras(1) == [{'produtos': [1], 'total': 100}]
+    assert realizar_compra(1, [1]) == 100, "Compra não foi realizada com sucesso."
 
     # 4. Tentar compra com produto inválido
     try:
@@ -31,11 +30,15 @@ def test_fluxo_integra_compras():
         assert str(error_msg) == "Produto 2 não encontrado.", f"Mensagem de erro incorreta: {error_msg}"
 
     # 5. Verificar compras do usuário 1
-    assert listar_compras(1) == [{'produtos': [1], 'total': 100}]
+    assert listar_compras(1) == [{'produtos': [1], 'total': 100}], "Compras retornadas não condizem com as compras efetuadas pelo usuário."
 
     # 6. Verificar um usuário que não tem compras
     cadastrar_usuario(2, "Maria José")
-    assert listar_compras(2) == []
+    assert listar_compras(2) == [], "Usuário verificado possui compras!"
+    
+    # Como não foi solicitado, considerei essa mensagem final como feedback suficiente para o testador
+    # As mensagens de erro em caso de falha nos `asserts` informam o comportamento do teste de fluxo
+    print("\nTodos os testes foram executados com êxito!\n")
 
 # Executa o teste
 if __name__ == "__main__":
